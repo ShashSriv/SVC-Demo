@@ -2,6 +2,29 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Install Node.js
+
+If you havent already, install Node.js. Download instructions can be found [here](https://nodejs.org/en/download).
+
+## Firebase Commands
+Below are useful commands for utilizing Google Firebase. Be sure you are in the project directory for these.
+
+### `firebase login`
+
+This allows you to login to google firebase.
+
+### `firebase serve`
+
+Runs the app locally on port 5000.
+
+### `firebase deploy`
+
+Pushes new changes to live production
+
+NOTE: you need to run `yarn build` first to compile react program. to install yarn, type  `npm install --global yarn` 
+
+# Default React documentation:
+
 ## Available Scripts
 
 In the project directory, you can run:
