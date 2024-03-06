@@ -6,6 +6,15 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 If you havent already, install Node.js. Download instructions can be found [here](https://nodejs.org/en/download).
 
+## Initial Dependencies
+You may need to install these dependencies in the project directory when editing/testing code for the first time:
+
+#### `npm install --global yarn`
+#### `npm install react-bootstrap bootstrap`
+#### `npm install -g firebase-tools`
+#### `npm install react-dom`
+#### `npm install react-router-dom`
+
 ## Firebase Commands
 Below are useful commands for utilizing Google Firebase. Be sure you are in the project directory for these.
 
