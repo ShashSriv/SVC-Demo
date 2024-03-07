@@ -1,7 +1,9 @@
-import React, {useState} from 'react'
-import { db } from '../../firebase';
+import React, {useState, useEffect} from 'react'
+import { db, auth } from '../../firebase';
+import App from '../../App';
 import { useNavigate } from 'react-router-dom';
 import { addDoc, collection } from 'firebase/firestore';
+import {onAuthStateChanged} from 'firebase/auth';
 import { Container, Form, Button } from 'react-bootstrap';
 
 const AddItem = () => {
@@ -26,28 +28,47 @@ const AddItem = () => {
             });
         }catch(error){
             console.log(error);
-        }
-        
-        
+        }   
     }
+
+    // login verification
+    const [authUser, setAuthUser] = useState(null);
+
+    useEffect(() => {
+        const listen = onAuthStateChanged(auth, (user) => {
+        if (user){
+            setAuthUser(user);
+        }else{
+            setAuthUser(null);
+        }
+        })
+        return () => {
+        listen();
+        }
+    }, []);
+
   return (
-    <Container>  
-        <h1 style={{textAlign:'center'}} className='mt-3'>Add Item</h1>
-        <Form.Control type='text' placeholder='Item Name' 
-            value={name} 
-            onChange={(e) => setName(e.target.value)}>     
-        </Form.Control>
+    <Container>
+        {authUser ? 
+        <Container>  
+            <h1 style={{textAlign:'center'}} className='mt-3'>Add Item</h1>
+            <Form.Control type='text' placeholder='Item Name' 
+                value={name} 
+                onChange={(e) => setName(e.target.value)}>     
+            </Form.Control>
 
-        <Form.Control type='number' placeholder='Cost (USD)' 
-            value={cost}
-            onChange={(e) => setCost(Number(e.target.value))}>
-        </Form.Control>
+            <Form.Control type='number' placeholder='Cost (USD)' 
+                value={cost}
+                onChange={(e) => setCost(Number(e.target.value))}>
+            </Form.Control>
 
-        <Form.Control type='number' placeholder='Quantity' 
-            value={quantity}
-            onChange={(e) => setQuantity(Number(e.target.value))}>
-        </Form.Control>
-        <Button onClick={addItem}>Add Item</Button>
+            <Form.Control type='number' placeholder='Quantity' 
+                value={quantity}
+                onChange={(e) => setQuantity(Number(e.target.value))}>
+            </Form.Control>
+            <Button onClick={addItem}>Add Item</Button>
+        </Container>
+    : <App></App> }
     </Container>
   )
 }
