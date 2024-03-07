@@ -3,7 +3,7 @@ import AuthDetails from '../components/auth/AuthDetails'
 import { useNavigate } from 'react-router-dom';
 import {db, auth} from '../firebase';
 import { getDocs, collection } from 'firebase/firestore';
-import { Button, Container, Table } from 'react-bootstrap';
+import { Button, Container, Table, Form } from 'react-bootstrap';
 import {onAuthStateChanged} from 'firebase/auth';
 
 const Home = () => {
@@ -13,6 +13,7 @@ const Home = () => {
     }
   
   const [itemList, setItemList] = useState([]);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     const itemsCollectionRef = collection(db, "items");
@@ -44,7 +45,7 @@ const Home = () => {
       listen();
     }
   }, []);
-    
+
   return (
     <Container>
       {authUser ? 
@@ -54,6 +55,8 @@ const Home = () => {
             <AuthDetails></AuthDetails>
           </div>
           <Button onClick={userAdd}>Add Item</Button>
+          <Form.Control onChange={(e) => setSearch(e.target.value)} placeholder='Search' />
+   
           <Table striped bordered hover responsive className='mt-5'>
             <thead>
               <th>IPC</th>
@@ -63,7 +66,9 @@ const Home = () => {
               <th>Category</th>
             </thead>
             <tbody>
-            {itemList.map((item) => (
+            {itemList.filter((item) => {
+              return search.toLowerCase() === '' ? item : item.Description.toLowerCase().includes(search);
+            }).map((item) => (
               <tr>
                 <td>{item.IPC}</td>
                 <td>{item.Qty}</td>
