@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { db, auth } from '../../firebase';
-import App from '../../App';
+import AuthDetails from '../auth/AuthDetails';
 import { useNavigate } from 'react-router-dom';
 import { addDoc, getDocs, collection } from 'firebase/firestore';
 import {onAuthStateChanged} from 'firebase/auth';
@@ -102,7 +102,7 @@ const AddItem = () => {
             </Form.Select>
             <Button onClick={addItem}>Add Item</Button>
         </Container>
-    : <App></App> }
+    : <Container className='mt-3'><AuthDetails /> </Container> }
     </Container>
   )
 }

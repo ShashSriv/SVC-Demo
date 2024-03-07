@@ -5,7 +5,6 @@ import {db, auth} from '../firebase';
 import { getDocs, collection } from 'firebase/firestore';
 import { Button, Container, Table } from 'react-bootstrap';
 import {onAuthStateChanged} from 'firebase/auth';
-import App from '../App';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -76,7 +75,7 @@ const Home = () => {
             </tbody>
           </Table>
       </Container>
-    : <App></App>}
+    : <Container className='mt-3'><AuthDetails /> </Container>}
     </Container>
   )
 }
