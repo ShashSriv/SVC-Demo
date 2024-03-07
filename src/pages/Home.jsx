@@ -57,16 +57,20 @@ const Home = () => {
           <Button onClick={userAdd}>Add Item</Button>
           <Table striped bordered hover responsive className='mt-5'>
             <thead>
-              <th>qty</th>
-              <th>Item Name</th>
-              <th>Cost (USD)</th>
+              <th>IPC</th>
+              <th>Qty</th>
+              <th>Description</th>
+              <th>Cost/EA (USD)</th>
+              <th>Category</th>
             </thead>
             <tbody>
             {itemList.map((item) => (
               <tr>
-                <td>{item.quantity}</td>
-                <td>{item.name}</td>
-                <td>{item.cost}</td>
+                <td>{item.IPC}</td>
+                <td>{item.Qty}</td>
+                <td>{item.Description}</td>
+                <td>{item.CostEA}</td>
+                <td>{item.Category}</td>
               </tr>
             ))}
             </tbody>
