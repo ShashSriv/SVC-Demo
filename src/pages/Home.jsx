@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import AuthDetails from '../components/auth/AuthDetails'
 import { useNavigate } from 'react-router-dom';
 import {db, auth} from '../firebase';
-import { getDocs, collection } from 'firebase/firestore';
+import { getDocs, collection, doc, deleteDoc } from 'firebase/firestore';
 import { Button, Container, Table, Form } from 'react-bootstrap';
 import {onAuthStateChanged} from 'firebase/auth';
 
@@ -20,7 +20,7 @@ const Home = () => {
     const getList = async () => {
       try{
         const data = await getDocs(itemsCollectionRef);
-        const filteredData = data.docs.map((doc) => ({...doc.data()}));
+        const filteredData = data.docs.map((doc) => ({id: doc.id, ...doc.data()}));
         setItemList(filteredData);     
       }catch(error){
         console.log(error);
@@ -30,6 +30,15 @@ const Home = () => {
     getList();
   }, []);
 
+  // delete item
+  const deleteItem = (id) => {
+    try {
+      deleteDoc(doc(db, "items", id));
+      window.location.reload(false);
+    }catch(error){
+      console.log(error);
+    }
+  }
   // login verification
   const [authUser, setAuthUser] = useState(null);
 
@@ -64,17 +73,19 @@ const Home = () => {
               <th>Description</th>
               <th>Cost/EA (USD)</th>
               <th>Category</th>
+              <th></th>
             </thead>
             <tbody>
             {itemList.filter((item) => {
               return search.toLowerCase() === '' ? item : item.Description.toLowerCase().includes(search);
             }).map((item) => (
-              <tr>
+              <tr key={item.id}>
                 <td>{item.IPC}</td>
                 <td>{item.Qty}</td>
                 <td>{item.Description}</td>
                 <td>{item.CostEA}</td>
                 <td>{item.Category}</td>
+                <td><Button onClick={() => {deleteItem(item.id)}}>Delete</Button></td>
               </tr>
             ))}
             </tbody>
