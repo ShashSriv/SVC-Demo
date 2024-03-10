@@ -39,10 +39,16 @@ const Home = () => {
   const updateItem = async (id) => {
     try{
       const ref = doc(db, "items", id);
-      await updateDoc(ref, {
-        Qty: editedQty,
-        CostEA: editedCost
-      });
+      if (editedCost !== ''){
+        await updateDoc(ref, {
+          CostEA: editedCost
+        });
+      }
+      if (editedQty !== ''){
+        await updateDoc(ref, {
+          Qty: editedQty
+        });
+      }
       setEditItem('');
       setEditedCost('');
       setEditedQty('');
@@ -59,6 +65,7 @@ const Home = () => {
       console.log(error);
     }
   }
+
   // login verification
   const [authUser, setAuthUser] = useState(null);
 
