@@ -32,7 +32,6 @@ const Home = () => {
   }, []);
 
   // update item
-
   const [editItem, setEditItem] = useState(null);
   const [editedQty, setEditedQty] = useState('');
   const [editedCost, setEditedCost] = useState('');
@@ -105,7 +104,7 @@ const Home = () => {
 
                 <td>
                   {editItem === item.id ? (
-                    <Form.Control type='number' value={editedQty} onChange={(e) => setEditedQty(Number(e.target.value))} />
+                    <Form.Control type='number' value={editedQty === '' ? item.Qty : editedQty} onChange={(e) => setEditedQty(Number(e.target.value))} />
                   ) :
                   (item.Qty)}
                 </td>
@@ -114,7 +113,7 @@ const Home = () => {
 
                 <td>
                   {editItem === item.id ? (
-                    <Form.Control type='number' value={editedCost} onChange={(e) => setEditedCost(Number(e.target.value))} />
+                    <Form.Control type='number' value={editedCost === '' ? item.CostEA : editedCost} onChange={(e) => setEditedCost(Number(e.target.value))} />
                   ) : 
                   (item.CostEA)}
                 </td>
