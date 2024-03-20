@@ -134,7 +134,7 @@ const Home = () => {
             </thead>
             <tbody>
             {itemList.filter((item) => {
-              return search.toLowerCase() === '' ? item : item.Description.toLowerCase().includes(search);
+              return search.toLowerCase() === '' ? item : item.Description.toLowerCase().includes(search.toLowerCase());
             }).map((item) => (
               <tr key={item.id}>
                 <td>{item.IPC}</td>
