@@ -8,17 +8,19 @@ const GenerateBarcode = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const { price } = location.state;
+    const {itemName} = location.state;
 
     const handleGoBack = () => {
         navigate('/home');
     };
+    
 
-    const barcodeValue = `Price: ${price}`;
+    const barcodeValue = `${itemName}-${price}`;
 
     return (
         <Container>
             <h1>Generate Barcode</h1>
-            <Barcode value={barcodeValue} />
+            <Barcode value={barcodeValue}/>
             <button onClick={handleGoBack}>Go Back</button>
         </Container>
     );

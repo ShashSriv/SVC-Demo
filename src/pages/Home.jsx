@@ -97,7 +97,7 @@ const Home = () => {
   }
 
   const generateBarcode = (item) => {
-      navigate("/generateBarcode", { state: { price: item.CostEA } });
+      navigate("/generateBarcode", { state: { price: item.CostEA, itemName: item.Description } });
   }
 
   // login verification
