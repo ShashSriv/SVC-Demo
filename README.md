@@ -14,6 +14,7 @@ You may need to install these dependencies in the project directory when editing
 #### `npm install -g firebase-tools`
 #### `npm install react-dom`
 #### `npm install react-router-dom`
+#### `npm install react-barcode`
 
 ## Firebase Commands
 Below are useful commands for utilizing Google Firebase. Be sure you are in the project directory for these.
