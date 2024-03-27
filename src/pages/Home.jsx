@@ -96,6 +96,10 @@ const Home = () => {
     }
   }
 
+  const generateBarcode = (item) => {
+      navigate("/generateBarcode", { state: { price: item.CostEA } });
+  }
+
   // login verification
   const [authUser, setAuthUser] = useState(null);
 
@@ -183,6 +187,7 @@ const Home = () => {
                     <>
                     <Button onClick={() => {setEditItem(item.id)}}>Update</Button> {' '}
                     <Button onClick={() => {deleteItem(item.id)}}>Delete</Button>
+                    <Button onClick={() => {generateBarcode(item)}}>Generate Barcode</Button>
                     </>
                   )}
                 </td>

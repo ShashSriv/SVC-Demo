@@ -10,6 +10,7 @@ import reportWebVitals from './reportWebVitals';
 import LoginPage from './pages/LoginPage';
 import Home from './pages/Home';
 import AddItem from './components/database/AddItem';
+import GenerateBarcode from './components/database/GenerateBarcode';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const router = createBrowserRouter([
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
   {
     path: "/addItem",
     element: <AddItem />
+  },
+  {
+    path: "/generateBarcode",
+    element: <GenerateBarcode />
   }
 ]);
 
