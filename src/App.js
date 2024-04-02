@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import {onAuthStateChanged} from 'firebase/auth';
 import { auth } from './firebase';
 import { useNavigate } from 'react-router-dom';
+import LoginPage from './pages/LoginPage';
 
 
 function App() {
@@ -23,7 +24,8 @@ function App() {
   });
 
   return (
-    <Container className='mt-3'>
+    <Container>
+      <LoginPage></LoginPage>
     </Container>
   );
 }

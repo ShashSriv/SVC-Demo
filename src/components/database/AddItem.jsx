@@ -18,18 +18,22 @@ const AddItem = () => {
 
     const addItem = async () => {
         try{
-            await addDoc(itemsCollectionRef, {
-                IPC: IPC, 
-                Qty: quantity, 
-                Description: description,
-                CostEA: cost,
-                Category: category
-            }).then(() => {
+            if (IPC !== '' || quantity !== '' || description !== '' || cost !== '' || category !== ''){
+                await addDoc(itemsCollectionRef, {
+                    IPC: IPC, 
+                    Qty: quantity, 
+                    Description: description,
+                    CostEA: cost,
+                    Category: category
+                }).then(() => {
+                    navigate("/home");
+                    console.log('added item successfully!');
+                }).catch((error) => {
+                    console.log(error);
+                });
+            }else{
                 navigate("/home");
-                console.log('added item successfully!');
-            }).catch((error) => {
-                console.log(error);
-            });
+            }
         }catch(error){
             console.log(error);
         }   
@@ -70,40 +74,61 @@ const AddItem = () => {
     }, []);
 
   return (
-    <Container>
+    <div className='background'>
         {authUser ? 
-        <Container>  
-            <h1 style={{textAlign:'center'}} className='mt-3'>Add Item</h1>
-            <Form.Control type='text' placeholder='IPC' 
-                value={IPC} 
-                onChange={(e) => setIPC(e.target.value)}>     
-            </Form.Control>
-
-            <Form.Control type='text' placeholder='Description' 
-                value={description} 
-                onChange={(e) => setDescription(e.target.value)}>     
-            </Form.Control>
-
-            <Form.Control type='number' placeholder='Cost/EA (USD)' 
-                value={cost}
-                onChange={(e) => setCost(Number(e.target.value))}>
-            </Form.Control>
-
-            <Form.Control type='number' placeholder='Quantity' 
-                value={quantity}
-                onChange={(e) => setQuantity(Number(e.target.value))}>
-            </Form.Control>
-
-            <Form.Select value={category} onChange={(e) => setCategory(e.target.value)}>
-                <option>Category</option>
-                {itemList.map((item) => (
-                    <option>{item.category}</option>
-                ))}
-            </Form.Select>
-            <Button onClick={addItem}>Add Item</Button>
+        <Container className='add-box'>  
+            <div class="container py-4 px-5 px-md-5 mb-3">
+                <div class="text-center mb-4">
+                    <h1>Add Item</h1>
+                </div>
+                <div class="row gx-5 justify-content-center">
+                    <div>
+                        <div class="form-floating mb-3">
+                            <Form.Control type='text' id='IPC' placeholder='IPC' 
+                                value={IPC} 
+                                onChange={(e) => setIPC(e.target.value)}>     
+                            </Form.Control>
+                            <label class="form-label text-black" for="IPC">IPC</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <Form.Control type='text' id='description' placeholder='Description' 
+                                value={description} 
+                                onChange={(e) => setDescription(e.target.value)}>     
+                            </Form.Control>
+                            <label class="form-label text-black" for="description">Description</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <Form.Control type='number' id='cost' placeholder='Cost/EA (USD)' 
+                                value={cost}
+                                onChange={(e) => setCost(Number(e.target.value))}>
+                            </Form.Control>
+                            <label class="form-label text-black" for="cost">Cost/EA</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <Form.Control type='number' id='quantity' placeholder='Quantity' 
+                                value={quantity}
+                                onChange={(e) => setQuantity(Number(e.target.value))}>
+                            </Form.Control>
+                            <label class="form-label text-black" for="quantity">Quantity</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <Form.Select id='category' value={category} onChange={(e) => setCategory(e.target.value)}>
+                                <option>null</option>
+                                {itemList.map((item) => (
+                                    <option>{item.category}</option>
+                                ))}
+                            </Form.Select>
+                            <label class="form-label text-black" for="category">Category</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <Button onClick={addItem}>Add Item</Button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </Container>
     : <Container className='mt-3'><AuthDetails /> </Container> }
-    </Container>
+    </div>
   )
 }
 
