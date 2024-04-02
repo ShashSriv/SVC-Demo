@@ -49,6 +49,7 @@ const Home = () => {
 
   // update item
   const [editItem, setEditItem] = useState(null);
+  const [editedIPC, setEditedIPC] = useState('');
   const [editedQty, setEditedQty] = useState('');
   const [editedDescription, setEditedDescription] = useState('');
   const [editedCost, setEditedCost] = useState('');
@@ -57,6 +58,10 @@ const Home = () => {
   const updateItem = async (id) => {
     try{
       const ref = doc(db, "items", id);
+      await updateDoc(ref, {
+        IPC: editedIPC
+      });
+      
       if (editedCost !== ''){
         await updateDoc(ref, {
           CostEA: editedCost
@@ -124,11 +129,13 @@ const Home = () => {
           <div className='position-absolute top-0 end-0'>
             <AuthDetails></AuthDetails>
           </div>
-          <Button onClick={userAdd}>Add Item</Button>
+          <div class="mb-2">
+            <Button onClick={userAdd}>Add Item</Button>
+          </div>
           <Form.Control onChange={(e) => setSearch(e.target.value)} placeholder='Search' />
    
           <Table striped bordered hover responsive className='mt-5'>
-            <thead>
+            <thead class="text-center">
               <th>IPC</th>
               <th>Qty</th>
               <th>Description</th>
@@ -141,7 +148,11 @@ const Home = () => {
               return search.toLowerCase() === '' ? item : item.Description.toLowerCase().includes(search.toLowerCase());
             }).map((item) => (
               <tr key={item.id}>
-                <td>{item.IPC}</td>
+                <td>{editItem === item.id ? (
+                    <Form.Control type='text' value={editedIPC === '_' ? item.IPC : editedIPC} onChange={(e) => setEditedIPC(e.target.value)} />
+                ) : 
+                (item.IPC)}
+                </td>
 
                 <td>
                   {editItem === item.id ? (
@@ -174,21 +185,22 @@ const Home = () => {
 
                 <td>
                   {editItem === item.id ? (
-                    <>
-                    <Button onClick={() => {updateItem(item.id)}}>Save</Button> {' '}
-                    <Button onClick={() => {
+                    <div class="mb-2">
+                    <Button class="btn btn-primary" style={{margin: 4}} onClick={() => {updateItem(item.id)}}>Save</Button> 
+                    <Button class="btn btn-primary" style={{margin: 4}} onClick={() => {
                       setEditItem(''); 
+                      setEditedIPC('_');
                       setEditedCost(''); 
                       setEditedDescription(''); 
                       setEditedQty(''); 
                       setEditedCategory('');}}>Cancel</Button>
-                    </>
+                    </div>
                   ) : (
-                    <>
-                    <Button onClick={() => {setEditItem(item.id)}}>Update</Button> {' '}
-                    <Button onClick={() => {deleteItem(item.id)}}>Delete</Button>
-                    <Button onClick={() => {generateBarcode(item)}}>Generate Barcode</Button>
-                    </>
+                    <div>
+                    <Button class="btn btn-primary" style={{margin: 4}} onClick={() => {setEditItem(item.id)}}>Update</Button>
+                    <Button class="btn btn-primary" style={{margin: 4}} onClick={() => {deleteItem(item.id)}}>Delete</Button>
+                    <Button class="btn btn-primary" style={{margin: 4}} onClick={() => {generateBarcode(item)}}>Generate Barcode</Button>
+                    </div>
                   )}
                 </td>
               </tr>
