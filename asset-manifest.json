@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/SVC-demo/static/css/main.363a9225.css",
+    "main.js": "/SVC-demo/static/js/main.71f13a5c.js",
+    "static/js/453.16e5a8c7.chunk.js": "/SVC-demo/static/js/453.16e5a8c7.chunk.js",
+    "static/media/Background1.jpg": "/SVC-demo/static/media/Background1.a12262824d725f17dd1d.jpg",
+    "index.html": "/SVC-demo/index.html",
+    "main.363a9225.css.map": "/SVC-demo/static/css/main.363a9225.css.map",
+    "main.71f13a5c.js.map": "/SVC-demo/static/js/main.71f13a5c.js.map",
+    "453.16e5a8c7.chunk.js.map": "/SVC-demo/static/js/453.16e5a8c7.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.363a9225.css",
+    "static/js/main.71f13a5c.js"
+  ]
+}
