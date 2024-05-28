@@ -1,4 +1,5 @@
 {
+  "homepage": "https://ShashSriva.github.io/SVC-demo",
   "name": "react-firebase-auth",
   "version": "0.1.0",
   "private": true,
@@ -20,6 +21,8 @@
     "yarn": "^1.22.21"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
