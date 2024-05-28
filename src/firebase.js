@@ -7,12 +7,13 @@ import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDvqnqjbWWyRt7cgFkIYj7zXmnPllDJNq0",
-  authDomain: "canteen-inventory.firebaseapp.com",
-  projectId: "canteen-inventory",
-  storageBucket: "canteen-inventory.appspot.com",
-  messagingSenderId: "846722228922",
-  appId: "1:846722228922:web:bd9bcb985141da067b9883"
+  apiKey: "AIzaSyCNPJQvcHLQV-Et94m8N1WKDQoZ8LZF-x0",
+  authDomain: "svc-demo-facab.firebaseapp.com",
+  projectId: "svc-demo-facab",
+  storageBucket: "svc-demo-facab.appspot.com",
+  messagingSenderId: "19773977152",
+  appId: "1:19773977152:web:fa8ba16cdf2a305aeea5a5",
+  measurementId: "G-WJ6F2DKGTY"
 };
 
 // Initialize Firebase
